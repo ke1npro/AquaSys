@@ -24,7 +24,8 @@ namespace GUI
             plantaService = new PlantaService();
             parametroService = new ParametroService();
             lista = plantaService.ObtenerTodo();
-            dataGridView1.DataSource = plantaService.ObtenerTodo();
+            dgvPlantas.DataSource = plantaService.ObtenerTodo();
+            dgvPlantas.ReadOnly=true;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -80,17 +81,18 @@ namespace GUI
         private void tabListadoPlantas_Enter(object sender, EventArgs e)
         {
             lista = plantaService.ObtenerTodo();
-            dataGridView1.DataSource = lista;
+            dgvPlantas.DataSource = lista;
         }
 
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
-            var aux = dataGridView1.CurrentRow;
+            var aux = dgvPlantas.CurrentRow;
             int id = int.Parse(aux.Cells[0].Value.ToString());
             PlantaSeleccionada = plantaService.ObtenerPorId(id);
+            parametroService.Guardar(ObtenerParametro());
         }
 
-        public Parametros ObtenerParametro()
+        private Parametros ObtenerParametro()
         {
             Parametros parametro = new Parametros();
             parametro.AsignarPlanta(PlantaSeleccionada);

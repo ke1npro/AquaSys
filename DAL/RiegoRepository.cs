@@ -14,7 +14,7 @@ namespace DAL
         List<Riego> lista=new List<Riego>();
         public RiegoRepository(string ruta) {
             this.ruta = ruta;
-            StreamWriter sw = new StreamWriter(ruta, true);
+            using (StreamWriter sw = new StreamWriter(ruta, true)) { } ;
         }
 
         public string Agregar(Riego riego)
@@ -62,11 +62,10 @@ namespace DAL
         {
             var aux = v.Split(';');
             Riego riego = new Riego();
-            riego.Id=int.Parse(aux[0]);
-            DateTime fecha = DateTime.ParseExact(aux[1], "yyyy-MM-dd HH:mm:ss",null);
+            DateTime fecha = DateTime.ParseExact(aux[0], "yyyy-MM-dd HH:mm:ss",null);
             riego.Fecha=fecha; 
-            riego.Tiempo=int.Parse(aux[2]);
-            riego.AguaGastada = int.Parse(aux[3]);
+            riego.Tiempo=int.Parse(aux[1]);
+            riego.AguaGastada = int.Parse(aux[2]);
             return riego;
         }
     }

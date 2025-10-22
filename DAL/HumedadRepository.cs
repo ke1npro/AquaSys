@@ -15,10 +15,7 @@ namespace DAL
         public HumedadRepository(string ruta) 
         { 
             this.ruta = ruta;
-            if (!File.Exists(ruta))
-            {
-                File.Create(ruta).Close();
-            }
+            using (StreamWriter sw = new StreamWriter(ruta, true)) { };
         }
         public string Guardar(List<Humedad> lista)
         {
@@ -29,6 +26,18 @@ namespace DAL
                 {
                     sw.WriteLine(humedad.ToString());
                 }
+                return "Se ha guardado todo en memoria exitosamente";
+            }
+
+        }
+        public string Agregar(Humedad humedad)
+        {
+            StreamWriter sw = new StreamWriter(ruta,true);
+            using (sw)
+            {
+                
+                    sw.WriteLine(humedad.ToString());
+               
                 return "Se ha guardado todo en memoria exitosamente";
             }
 
@@ -51,7 +60,7 @@ namespace DAL
         {
             Humedad humedad = new Humedad();
             var aux = v.Split(';');
-            DateTime fecha=DateTime.ParseExact(aux[0],"yyyy-MM-dd HH-mm",null);
+            DateTime fecha=DateTime.ParseExact(aux[0],"yyyy-MM-dd HH:mm:ss",null);
             float porc = float.Parse(aux[1]);
 
             humedad.Fecha = fecha;

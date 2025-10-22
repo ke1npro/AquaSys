@@ -19,21 +19,10 @@ namespace BLL
 
         public static string Agregar(Riego entidad)
         {
-            //validar
-            entidad.Id = obtenerUltimoIdMasUno();
             return riegoRepository.Agregar(entidad);
         }
 
-        private static int obtenerUltimoIdMasUno(){
-
-            if (lista == null) { 
-                return 1;
-            }else{
-                int count = lista.Count;
-                int consecutivo =(lista.ElementAt(0).Id)+1;
-                return consecutivo;
-            }
-        }
+        
 
         public static string Guardar()
         {

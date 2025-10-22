@@ -25,6 +25,7 @@ namespace BLL
         private static DateTime InicioRiego;
         private static DateTime FinRiego;
         public static bool RegarActivo = false;
+        public static bool EstaRegando=false;
         public static async void CicloPrincipal()
         {
             
@@ -37,6 +38,7 @@ namespace BLL
                     Console.WriteLine("RIEGO DESACTIVADO!!!");
                     continue;
                 }
+                EstaRegando = Simular.regando;
                 HumedadActual = Simular.HumedadPorc;
                 VerificarEstado();
                 if (RegandoPorEvento)
@@ -44,17 +46,18 @@ namespace BLL
                     if (HumedadActual > HumedadMaxima)
                     {
                         DetenerRiego();
+                        RegandoPorEvento = false;
                     }
                 }
-                if(EsperaRiego>= TiempoElapsado)
+                if(TiempoElapsado>=EsperaRiego)
                 {
                     Regar(true);
                     TiempoElapsado = 0;
                 }
 
 
-                await Task.Delay(1500);
-                TiempoElapsado += 15;
+                await Task.Delay(1000);
+                TiempoElapsado += 1;
             
             }
         }
@@ -65,17 +68,21 @@ namespace BLL
         private static void VerificarEstado()
         {
             //En caso tal de que este muy por debajo de la humedad minima
-            if ((HumedadMinima - HumedadActual) < UmbralHumedad)
+            if ((HumedadMinima - HumedadActual) > UmbralHumedad)
             {
                 Regar(false);
                 TiempoRiego *=1.05f;
                 RegandoPorEvento = true;
+                Console.WriteLine("Regando por humedad baja");
             }
             //En caso tal que exceda mucho la humedad máxima
-            if ((HumedadActual - HumedadMaxima) > UmbralHumedad)
+            if (EstaRegando)
             {
-                TiempoRiego *= 0.98f;
-                DetenerRiego();
+                if ((HumedadActual - HumedadMaxima) > UmbralHumedad)
+                {
+                    TiempoRiego *= 0.98f;
+                    DetenerRiego();
+                }
             }
 
 
@@ -87,6 +94,7 @@ namespace BLL
         {
             if (temporizado)
             {
+                Console.WriteLine("Inicio riego temporizado");
                 IniciarRiego();
                 await Task.Delay((int)(TiempoRiego * 1000));
                 DetenerRiego();
@@ -105,6 +113,7 @@ namespace BLL
         
         private static void DetenerRiego()
         {
+            Console.WriteLine("Deteniendo riego");
             Simular.DetenerRiego();
             FinRiego = DateTime.Now;
             TimeSpan aux = FinRiego - InicioRiego;

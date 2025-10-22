@@ -26,7 +26,7 @@ namespace Simulacion
                     HumedadPorc -=0.1f;
                 }
 
-                await Task.Delay(1500);
+                await Task.Delay(100);
             }
         }
 

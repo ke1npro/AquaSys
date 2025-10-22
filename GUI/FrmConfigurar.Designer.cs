@@ -45,7 +45,7 @@
             this.TabPlantas = new System.Windows.Forms.TabPage();
             this.tabListadoPlantas = new System.Windows.Forms.TabPage();
             this.btnSeleccionar = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvPlantas = new System.Windows.Forms.DataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.nudArea = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -58,7 +58,7 @@
             this.tabControl1.SuspendLayout();
             this.TabPlantas.SuspendLayout();
             this.tabListadoPlantas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlantas)).BeginInit();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudArea)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -201,7 +201,7 @@
             // tabListadoPlantas
             // 
             this.tabListadoPlantas.Controls.Add(this.btnSeleccionar);
-            this.tabListadoPlantas.Controls.Add(this.dataGridView1);
+            this.tabListadoPlantas.Controls.Add(this.dgvPlantas);
             this.tabListadoPlantas.Location = new System.Drawing.Point(4, 25);
             this.tabListadoPlantas.Name = "tabListadoPlantas";
             this.tabListadoPlantas.Padding = new System.Windows.Forms.Padding(3);
@@ -221,16 +221,16 @@
             this.btnSeleccionar.UseVisualStyleBackColor = true;
             this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
-            // dataGridView1
+            // dgvPlantas
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(571, 235);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.Enter += new System.EventHandler(this.dataGridView1_Enter);
+            this.dgvPlantas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPlantas.Location = new System.Drawing.Point(0, 0);
+            this.dgvPlantas.Name = "dgvPlantas";
+            this.dgvPlantas.RowHeadersWidth = 51;
+            this.dgvPlantas.RowTemplate.Height = 24;
+            this.dgvPlantas.Size = new System.Drawing.Size(571, 235);
+            this.dgvPlantas.TabIndex = 0;
+            this.dgvPlantas.Enter += new System.EventHandler(this.dataGridView1_Enter);
             // 
             // tabPage1
             // 
@@ -305,7 +305,7 @@
             this.TabPlantas.ResumeLayout(false);
             this.TabPlantas.PerformLayout();
             this.tabListadoPlantas.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlantas)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudArea)).EndInit();
@@ -329,7 +329,7 @@
         private System.Windows.Forms.TabPage tabListadoPlantas;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnSeleccionar;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvPlantas;
         private System.Windows.Forms.NumericUpDown nudHumedadMaxima;
         private System.Windows.Forms.NumericUpDown nudHumedadMinima;
         private System.Windows.Forms.ErrorProvider errorProvider1;

@@ -8,14 +8,13 @@ namespace Entidad
 {
     public class Riego
     {
-        public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public int Tiempo { get; set; }
         public int AguaGastada { get; set; }
 
         public override string ToString()
         {
-            return $"{Id};{Fecha.ToString("yyyy-MM-dd HH:mm:ss")};{Tiempo};{AguaGastada}";
+            return $"{Fecha.ToString("yyyy-MM-dd HH:mm:ss")};{Tiempo};{AguaGastada}";
         }
 
        

@@ -13,11 +13,8 @@ namespace DAL
         string ruta;
         PlantaRepository plantaRepository;
         public ParametroRepository(string ruta) { 
-            this.ruta = ruta; 
-            if (!File.Exists(ruta))
-            {
-                File.Create(ruta).Close();
-            }
+            this.ruta = ruta;
+            using (StreamWriter sw = new StreamWriter(ruta, true)) { };
             plantaRepository = new PlantaRepository(Utils.ARC_PLANTA);
         }
 

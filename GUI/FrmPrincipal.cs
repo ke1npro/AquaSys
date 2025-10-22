@@ -17,17 +17,18 @@ namespace GUI
     {
         static int debug;
         ParametroService parametroService;
-        HumedadService humedadService;
+        int count = 0;
         public FrmPrincipal()
         {
             InitializeComponent();
-            timer1.Interval = 5000;
+            timer1.Interval = 1000;
             timer1.Enabled = true;
             parametroService = new ParametroService();
-            humedadService = new HumedadService();
+            
+
         }
 
-        
+
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
@@ -37,8 +38,6 @@ namespace GUI
                 MessageBox.Show("No se ha configurado el programa! Favor insertar datos antes de continuar");
                 FrmConfigurar f = new FrmConfigurar();
                 f.ShowDialog();
-                Parametros param=f.ObtenerParametro();
-                parametroService.Guardar(param);
                 RefrescarParametro();
             }
             else
@@ -56,9 +55,12 @@ namespace GUI
                 lblEspecie.Text = parametro.Planta.Nombre;
                 lblArea.Text = parametro.Area.ToString();
                 float HumedadMinima = parametro.Planta.HumedadMinima;
-                float HumedadMaxima = parametro.Planta.HumedadMinima;
-                LogicaPrincipal.EstablecerUmbral(HumedadMinima, HumedadMaxima, 20);
+                float HumedadMaxima = parametro.Planta.HumedadMaxima;
+                LogicaPrincipal.EstablecerUmbral(HumedadMinima, HumedadMaxima, 10);
                 LogicaPrincipal.RegarActivo = true;
+                label4.Text = HumedadMaxima.ToString("F1")+"%";
+                label5.Text = HumedadMinima.ToString("F1") + "%";
+
             }
         }
 
@@ -73,13 +75,29 @@ namespace GUI
         {
             lblHumedad.Text = LogicaPrincipal.HumedadActual.ToString()+"%";
 
-            int count = 0;
-            if (count > 15)
+            bool estado = LogicaPrincipal.EstaRegando;
+            if (estado)
             {
+                lblEstado.Text = "Regando";
+            }
+            else
+            {
+                lblEstado.Text = "Inactivo";
+            }
 
+            
+            count++;
+            if (count > 1)
+            {
+                Console.WriteLine("Registrando humedad");
+                Humedad humedad = new Humedad();
+                humedad.Fecha = DateTime.Now;
+                humedad.Porcentaje = LogicaPrincipal.HumedadActual;
+                HumedadService.Agregar(humedad);
+                count = 0;
             }
         }
-
+        
         private void btnConfigurar_Click(object sender, EventArgs e)
         {
             FrmConfigurar f = new FrmConfigurar();
@@ -92,7 +110,25 @@ namespace GUI
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            pictureBox1.Load(openFileDialog1.FileName);
+            try
+            {
+                pictureBox1.Load(openFileDialog1.FileName);
+             }catch(Exception h)
+            {
+
+            }
+        }
+
+        private void btnHistorial_Click(object sender, EventArgs e)
+        {
+            FrmHistorialHumedad f = new FrmHistorialHumedad();
+            f.ShowDialog();
+        }
+
+        private void btnRegistro_Click(object sender, EventArgs e)
+        {
+            FrmRegistroRiego f = new FrmRegistroRiego();
+            f.ShowDialog();
         }
     }
 }

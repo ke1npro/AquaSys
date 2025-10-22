@@ -52,19 +52,37 @@
     <Compile Include="FrmConfigurar.Designer.cs">
       <DependentUpon>FrmConfigurar.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmHistorialHumedad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHistorialHumedad.Designer.cs">
+      <DependentUpon>FrmHistorialHumedad.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmPrincipal.Designer.cs">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmRegistroRiego.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmRegistroRiego.Designer.cs">
+      <DependentUpon>FrmRegistroRiego.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmConfigurar.resx">
       <DependentUpon>FrmConfigurar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmHistorialHumedad.resx">
+      <DependentUpon>FrmHistorialHumedad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmRegistroRiego.resx">
+      <DependentUpon>FrmRegistroRiego.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
